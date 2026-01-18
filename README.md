@@ -1,3 +1,5 @@
+![CI](https://github.com/Figue4870/api-integration-resilient/actions/workflows/ci.yml/badge.svg)
+
 # API Integration Resilient Client (Retries + Rate Limit + Pagination) + QA
 
 A small portfolio project that demonstrates a production-style API integration:
