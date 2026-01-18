@@ -1,4 +1,5 @@
-![CI](https://github.com/Figue4870/api-integration-resilient/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Figue4870/api-integration-resilient/actions/workflows/ci.yml/badge.svg?branch=main)
+
 
 # API Integration Resilient Client (Retries + Rate Limit + Pagination) + QA
 
