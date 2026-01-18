@@ -22,3 +22,70 @@ This repo shows a minimal but robust client + tests.
 ---
 
 ## Project structure
+broken/ # naive implementation that fails on edge cases
+fixed/ # resilient client + pagination + CLI demo
+tests/ # pytest tests with mocked HTTP
+
+
+---
+
+## Quickstart (local)
+### 1 Create venv
+```bash
+python -m venv .venv
+```
+### Activate venv
+
+windows (powershell)
+```bash
+.\.venv\Scripts\Activate.ps1
+```
+Mac/Linux
+```bash
+source .venv/bin/activate
+```
+Install dependencies
+```bash
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+```
+Run tests
+```bash
+pytest -q
+```
+
+### Demo (real API)
+Fetch GitHub issues across multiple pages (limited by max_pages):
+
+```bash
+python -m fixed.cli
+```
+
+Optional: add a GitHub token to reduce rate-limit issues:
+
+```bash
+# Windows PowerShell:
+$env:GITHUB_TOKEN="YOUR_TOKEN_HERE"
+
+# Mac/Linux:
+export GITHUB_TOKEN="YOUR_TOKEN_HERE"
+
+```
+
+## What "broken" does wrong
+
+- Only fetches the first page
+- No retries for 5xx
+- No rate-limit handling
+- No controlled error behavior
+
+## What "fixed" does better
+- Retries for transient errors (5xx, timeouts)
+- Handles 429 using Retry-After
+- Detects rate windows via X-RateLimit-Remaining / X-RateLimit-Reset
+- Supports pagination via Link header
+- Includes tests that simulate: pagination, 5xx, 429
+
+## Notes
+- Tests use mocked responses so they are fast and deterministic.
+- No secrets are committed.
